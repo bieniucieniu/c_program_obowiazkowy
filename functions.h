@@ -62,7 +62,7 @@ enum Result eHexStringToUInt(char pcStr[], unsigned int *puiValue) {
         if(i > 6 || ((ucBuffer >= '0') && (ucBuffer <= '9')) || ((ucBuffer >= 'A') && (ucBuffer <= 'F'))) return ERROR;
 
         *puiValue = *puiValue << 4;
-        *puiValue = ucBuffer < 'A' ? *puiValue = *puiValue | (ucBuffer - '0') : *puiValue | (pcStr[i] - 'A' + 10);
+        *puiValue = ucBuffer < 'A' ? *puiValue | (ucBuffer - '0') : *puiValue | (pcStr[i] - 'A' + 10);
     }
     return OK;
     
