@@ -15,9 +15,9 @@ void CopeString(char pcSource[], char pcDestination[]) {
 }
 
 
-enum EEquivalent{NOTEQUEL, EQUEL};
+enum CompResult {NOTEQUEL, EQUEL};
 
-enum EEquivalent eCompareStr(char str1[], char str2[]) {
+enum CompResult eCompareStr(char str1[], char str2[]) {
     for (unsigned char ucCharCounter = 0; str1[ucCharCounter] || str2[ucCharCounter]; ucCharCounter++) {
         if(str1[ucCharCounter] != str2[ucCharCounter]) return NOTEQUEL;
     }
@@ -45,15 +45,27 @@ void UIntToHexStr(unsigned int uiValue, char pcStr[]) {
 
     unsigned char ucBuffer;
 
-    for(char i = 0; i < 4; i++) {
+    for(char ucCharCounter = 0; ucCharCounter < 4; ucCharCounter++) {
         ucBuffer = uiValue & 0b1111;
-        pcStr[5 - i] = ucBuffer < 10 ? '0' + ucBuffer : 'A' + ucBuffer - 10;
+        pcStr[5 - ucCharCounter] = ucBuffer < 10 ? '0' + ucBuffer : 'A' + ucBuffer - 10;
     }
 }
+enum Result { OK, ERROR };
 
+enum Result eHexStringToUInt(char pcStr[], unsigned int *puiValue) {
+    unsigned char ucBuffer;
+    if ((pcStr[0] != '0' && pcStr[1] != 'x') || pcStr[2] != NULL) return ERROR;
 
-void eHexStringToUInt(char pcStr[], unsigned int *puiValue) {
+    for (int i = 2; pcStr[i]; i++) {
+        if(i > 6) return ERROR;
 
+        ucBuffer = pcStr[i];
+
+        *puiValue = *puiValue << 4;
+        *puiValue = ucBuffer < 'A' ? *puiValue = *puiValue | (ucBuffer - '0') : *puiValue | (pcStr[i] - 'A' + 10);
+    }
+    return OK;
+    
 }
 
 #endif
