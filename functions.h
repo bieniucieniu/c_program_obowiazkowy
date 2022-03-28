@@ -57,9 +57,9 @@ enum Result eHexStringToUInt(char pcStr[], unsigned int *puiValue) {
     if ((pcStr[0] != '0' && pcStr[1] != 'x') || pcStr[2] != NULL) return ERROR;
 
     for (int i = 2; pcStr[i]; i++) {
-        if(i > 6) return ERROR;
-
         ucBuffer = pcStr[i];
+
+        if(i > 6 || ((ucBuffer >= '0') && (ucBuffer <= '9')) || ((ucBuffer >= 'A') && (ucBuffer <= 'F'))) return ERROR;
 
         *puiValue = *puiValue << 4;
         *puiValue = ucBuffer < 'A' ? *puiValue = *puiValue | (ucBuffer - '0') : *puiValue | (pcStr[i] - 'A' + 10);
