@@ -53,7 +53,7 @@ void UIntToHexStr(unsigned int uiValue, char pcStr[]) {
 
 
 void eHexStringToUInt(char pcStr[], unsigned int *puiValue) {
-    
+
 }
 
 #endif
