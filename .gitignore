@@ -4,4 +4,5 @@
 /test_functions.exe
 /test_functions.h
 /.gitignore
-/.main.c
+/main.c
+/functions.exe
